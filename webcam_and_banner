@@ -1,0 +1,6 @@
+C:\Temp\bin\ffmpeg ` -y -rtbufsize 900M `
+-f dshow -i video="Integrated Camera":audio="Headset Microphone (2- Plantronics Blackwire 315.1)" `
+-f gdigrab -offset_x -268 -offset_y -1440 -video_size 2560x1400 -i desktop `
+-i "C:\Temp\Banner_Visual_Development.png" `
+-c:v libx264 -r 20 -preset ultrafast -tune zerolatency -crf 0 -pix_fmt yuv420p `
+-filter_complex "[0:a]volume=volume=12[a];[0:v]scale=300:trunc(ow/a/2)*2[s];[1:v][s]overlay=(main_w-overlay_w):main_h-overlay_h[v];[v][2]overlay=(main_w-overlay_w):0[v2]" -map "[v2]" -map "[a]" "C:\Temp\-$(get-date -f yyyy-MM-dd-Hmss).mkv"   
