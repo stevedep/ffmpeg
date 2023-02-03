@@ -1,0 +1,7 @@
+C:\Temp\bin\ffmpeg -y -rtbufsize 900M -f dshow `
+-i video="Integrated Camera":audio="Microphone Array (Synaptics Audio)" `
+-f gdigrab -video_size 1920x1080 -i desktop `
+-c:v libx264 -r 20 -preset ultrafast -tune zerolatency -crf 0 -pix_fmt yuv420p `
+-filter_complex "[0:a]volume=volume=3,asplit=2[out1][out2]" `
+-map "1:v" -map "[out1]"   "C:\Temp\temp.mkv" `
+-map "0:v" -map "[out2]" "C:\Temp\webcam.mkv"
